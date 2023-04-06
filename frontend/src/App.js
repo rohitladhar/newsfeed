@@ -1,23 +1,41 @@
-import logo from './logo.svg';
 import './App.css';
-
+import React,{useState} from 'react';
+import Login from './components/Login';
+import Register from './components/Register';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Dashboard from './components/Dashboard';
+const store = require('store-js');
 function App() {
+
+  const token = store.get('token');
+  const [clicked, setClicked] = useState('login');
+  const[initial,setInitial] = useState(true)
+  if (token===undefined || token.length===0 || token===null ) {
+    
+    if (clicked === 'register') {
+      return <Register setClicked={setClicked} />;
+    } else {
+      return <Login setClicked={setClicked} />;
+    }
+  }
+
+  if(token.length>0){
+    return <Dashboard initial={initial} setInitial={setInitial}/>;
+  }
+
+ 
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div>
+        
+        <BrowserRouter>
+          <Routes>
+            <Route path="/home" element={<Dashboard />}></Route>
+          </Routes>
+        </BrowserRouter>
+        
+        
+      </div>
     </div>
   );
 }
