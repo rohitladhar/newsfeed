@@ -3,7 +3,7 @@ const Search = require("../models/search");
 //exports.topstoriesworld = async(req,res) =>{
 exports.topstoriesworld = async() =>{
     try {
-        const url = "https://api.nytimes.com/svc/topstories/v2/world.json?api-key=76VzJwHRIXvSoR4kXrQLc7BCtuRAuBsJ";
+        const url = "https://api.nytimes.com/svc/topstories/v2/world.json?api-key=76VzJwHRIXvSoSJHFDFR4kXrQLc7BCtuRAuBsJ";
         fetch(url)
         .then(response => response.json())
         .then(data =>
